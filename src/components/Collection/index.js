@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 30,
-        marginBottom: 20
+        margin: 10,
+        color: '#22211d',
     },
     teaserList: {
         flexDirection: 'row',

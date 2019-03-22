@@ -40,7 +40,11 @@ export class Landingpage extends React.Component {
 
     render() {
         if (this.state.loading) {
-            return (<Text>Bin am lade, hoi</Text>)
+            return (
+                <View style={styles.loadingWrapper}>
+                    <Text style={styles.loading}>Bin am lade, hoi</Text>
+                </View>
+            );
         }
         const { currentCollectionIndex = 0, data: { collections = [], title = '' } } = this.state;
         const collection = collections[currentCollectionIndex];
@@ -49,13 +53,13 @@ export class Landingpage extends React.Component {
             <View style={styles.landingPage}>
                 <Text style={styles.title}>{title}</Text>
 
-                <VrButton onClick={this._previousCollection} style={styles.prevButton}>
-                    <Text>Prev</Text>
+                <VrButton onClick={this._previousCollection} style={[styles.button, styles.prevButton]}>
+                    <Text style={styles.buttonText}>Prev</Text>
                 </VrButton>
 
 
-                <VrButton onClick={this._nextCollection} style={styles.nextButton}>
-                    <Text>Next</Text>
+                <VrButton onClick={this._nextCollection} style={[styles.button, styles.nextButton]}>
+                <Text style={styles.buttonText}>Next</Text>
                 </VrButton>
 
                 <Collection setArticle={this.props.setArticle} key={collection.urn} {...collection} />
@@ -65,22 +69,38 @@ export class Landingpage extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    loadingWrapper: {
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    loading: {
+        fontSize: 40
+    },
     landingPage: {
         width: '100%',
-        height: '100%'
+        height: '100%',
+        backgroundColor: '#F5F5F4'
     },
     title: {
         fontSize: 30,
-        marginBottom: 20
+        marginBottom: 20,
+        textAlign: 'center',
+        color: '#22211d',
+        width: '100%',
     },
-    prevButton: {
+    button: {
         position: 'absolute',
         top: 0,
+    },
+    prevButton: {
         left: 100,
     },
     nextButton: {
-        position: 'absolute',
-        top: 0,
         right: 100,
+    },
+    buttonText: {
+        color: '#22211d',
     }
 });

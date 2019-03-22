@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, StyleSheet, Text, VrButton } from 'react-360';
+import { Image, StyleSheet, Text, View, VrButton } from 'react-360';
 
 export class Teaser extends React.PureComponent {
     state = {
@@ -19,7 +19,7 @@ export class Teaser extends React.PureComponent {
     };
 
     render() {
-        const { title, urn, image, clickHandler = () => {} } = this.props;
+        const { title, kicker, urn, image, clickHandler = () => {} } = this.props;
 
         let imageSource;
 
@@ -31,13 +31,16 @@ export class Teaser extends React.PureComponent {
 
         return (
             <VrButton
-                style={this.state.hover ? styles.teaserHover : styles.teaser}
+                style={this.state.hover ? [styles.teaser, styles.teaserHover] : styles.teaser}
                 onEnter={this._startHover}
                 onExit={this._endHover}
                 onClick={() => clickHandler(urn)}>
 
                 <Image source={imageSource} style={styles.responsiveImage} />
-                <Text style={styles.title}>{title}</Text>
+                <View style={styles.teaserContent}>
+                    <Text style={styles.kicker}>{kicker}</Text>
+                    <Text style={styles.title}>{title}</Text>
+                </View>
             </VrButton>
         )
     }
@@ -46,22 +49,26 @@ export class Teaser extends React.PureComponent {
 const styles = StyleSheet.create({
     title: {
         fontSize: 20,
+        color: '#22211d'
+    },
+    kicker: {
+        fontSize: 18,
+        color: '#c91024',
     },
     teaser: {
-        backgroundColor: 'powderblue',
-        borderColor: 'black',
+        backgroundColor: '#fefefd',
+        borderRadius: 10,
         flexBasis: '20%',
         flexGrow: 1,
         flexShrink: 0,
         margin: 10,
     },
+    teaserContent: {
+        padding: 10
+    },
     teaserHover: {
-        backgroundColor: 'red',
-        borderColor: 'black',
-        flexBasis: '20%',
-        flexGrow: 1,
-        flexShrink: 0,
-        margin: 10,
+        shadowColor: 'black',
+        shadowRadius: 10
     },
     responsiveImage: {
         width: '100%',
