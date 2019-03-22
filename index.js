@@ -2,7 +2,6 @@ import React from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Text,
   View,
 } from 'react-360';
 import { Landingpage } from './src/components/Landingpage';
