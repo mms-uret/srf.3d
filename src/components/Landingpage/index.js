@@ -30,7 +30,7 @@ export class Landingpage extends React.Component {
         console.log(collections, title);
         
         return (
-            <View>
+            <View style={styles.landingPage}>
                 <Text style={styles.title}>{title}</Text>
                 {collections.map((collection) => {
                     return (
@@ -43,6 +43,9 @@ export class Landingpage extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    landingPage: {
+        width: '100%'
+    },
     title: {
         fontSize: 30,
         marginBottom: 20

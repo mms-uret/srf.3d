@@ -33,5 +33,6 @@ const styles = StyleSheet.create({
     },
     teaserList: {
         flexDirection: 'row',
+        flexWrap: 'wrap'
     },
 });
