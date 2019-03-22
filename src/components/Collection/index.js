@@ -13,9 +13,7 @@ export class Collection extends React.PureComponent {
                 <View style={styles.teaserList}>
                     {teasers.map((teaser) => {
                         return (
-                            <VrButton key={teaser.urn} onClick={() => this.props.setArticle(teaser.urn)}>
-                                <Teaser  {...teaser}/>
-                            </VrButton>
+                            <Teaser key={teaser.urn} clickHandler={this.props.setArticle} {...teaser}/>
                         );
                     })}
                 </View>
@@ -35,6 +33,7 @@ const styles = StyleSheet.create({
     },
     teaserList: {
         flexDirection: 'row',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        alignItems: 'stretch',
     },
 });

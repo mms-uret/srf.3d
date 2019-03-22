@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-360';
+import { Image, StyleSheet, Text, VrButton } from 'react-360';
 
 export class Teaser extends React.PureComponent {
     state = {
@@ -19,7 +19,7 @@ export class Teaser extends React.PureComponent {
     };
 
     render() {
-        const { title = '', image } = this.props;
+        const { title, urn, image, clickHandler = () => {} } = this.props;
 
         let imageSource;
 
@@ -30,10 +30,15 @@ export class Teaser extends React.PureComponent {
         }
 
         return (
-            <View style={this.state.hover ? styles.teaserHover : styles.teaser} onEnter={this._startHover} onExit={this._endHover}>
+            <VrButton
+                style={this.state.hover ? styles.teaserHover : styles.teaser}
+                onEnter={this._startHover}
+                onExit={this._endHover}
+                onClick={() => clickHandler(urn)}>
+
                 <Image source={imageSource} style={styles.responsiveImage} />
                 <Text style={styles.title}>{title}</Text>
-            </View>
+            </VrButton>
         )
     }
 }
@@ -48,7 +53,7 @@ const styles = StyleSheet.create({
         flexBasis: '20%',
         flexGrow: 1,
         flexShrink: 0,
-        margin: 10
+        margin: 10,
     },
     teaserHover: {
         backgroundColor: 'red',
@@ -56,7 +61,7 @@ const styles = StyleSheet.create({
         flexBasis: '20%',
         flexGrow: 1,
         flexShrink: 0,
-        margin: 10
+        margin: 10,
     },
     responsiveImage: {
         width: '100%',
