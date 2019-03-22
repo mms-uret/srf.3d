@@ -24,7 +24,9 @@ export class Teaser extends React.PureComponent {
         let imageSource;
 
         if (image && image.variations && image.variations['320ws']) {
-            imageSource = {uri: image.variations['320ws']};
+            const originalHash = image.variations['320ws'];
+            const hash = originalHash.split('/').pop();
+            imageSource = {uri: `http://localhost:8000/image/${hash}/320ws`};
         } else {
             imageSource = require('./placeholder.png');
         }
