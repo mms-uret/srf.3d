@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-360';
+import { StyleSheet, Text, View, VrButton } from 'react-360';
 import { Teaser } from '../Teaser';
 
 export class Collection extends React.PureComponent {
@@ -13,7 +13,9 @@ export class Collection extends React.PureComponent {
                 <View style={styles.teaserList}>
                     {teasers.map((teaser) => {
                         return (
-                            <Teaser key={teaser.urn} {...teaser}/>
+                            <VrButton key={teaser.urn} onClick={() => this.props.setArticle(teaser.urn)}>
+                                <Teaser  {...teaser}/>
+                            </VrButton>
                         );
                     })}
                 </View>

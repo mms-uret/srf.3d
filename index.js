@@ -5,14 +5,35 @@ import {
   View,
 } from 'react-360';
 import { Landingpage } from './src/components/Landingpage';
+import { Article } from './src/components/Article';
 
 export default class Hello360 extends React.Component {
+  state = {
+      articleToDisplay: null
+  };
+
+  setArticle = (articleId) =>  {
+      console.log(articleId);
+      this.setState({
+          articleToDisplay: articleId
+      })
+  };
+
   render() {
-    return (
-      <View style={styles.panel}>
-        <Landingpage />
-      </View>
-    );
+    if (this.state.articleToDisplay) {
+        return (
+            <View style={styles.panel}>
+                <Article urn={this.state.articleToDisplay}/>
+            </View>
+        )
+    } else {
+        return (
+            <View style={styles.panel}>
+                <Landingpage setArticle={this.setArticle}/>
+            </View>
+        );
+
+    }
   }
 };
 

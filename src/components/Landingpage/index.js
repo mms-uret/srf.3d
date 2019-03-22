@@ -37,7 +37,7 @@ export class Landingpage extends React.Component {
             currentCollectionIndex: nextIndex
         });
     };
-    
+
     render() {
         if (this.state.loading) {
             return (<Text>Bin am lade, hoi</Text>)
@@ -53,12 +53,12 @@ export class Landingpage extends React.Component {
                     <Text>Prev</Text>
                 </VrButton>
 
-                
+
                 <VrButton onClick={this._nextCollection} style={styles.nextButton}>
                     <Text>Next</Text>
                 </VrButton>
 
-                <Collection key={collection.urn} {...collection} /> 
+                <Collection setArticle={this.props.setArticle} key={collection.urn} {...collection} />
             </View>
         )
     }
