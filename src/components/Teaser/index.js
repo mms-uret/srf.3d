@@ -11,7 +11,6 @@ export class Teaser extends React.PureComponent {
             <View style={styles.teaser}>
                 <Image source={require('./placeholder.png')} style={styles.responsiveImage} />
                 <Text style={styles.title}>{title}</Text>
-                
             </View>
         )
     }

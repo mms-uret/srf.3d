@@ -3,7 +3,8 @@ import {Image, StyleSheet, Text, View, VrButton} from 'react-360';
 import { Collection } from '../Collection';
 export class Landingpage extends React.Component {
     state = {
-        data: 'hello'
+        data: false,
+        currentCollectionIndex: 0
     }
     
     componentDidMount() {
@@ -24,19 +25,44 @@ export class Landingpage extends React.Component {
             console.log('Could not get API information');
         });
     }
+
+    _previousCollection = () => {
+        const nextIndex =  Math.max(this.state.currentCollectionIndex - 1, 0);
+
+        this.setState({
+            currentCollectionIndex: nextIndex
+        });
+    };
+
+    _nextCollection = () => {
+        const nextIndex =  Math.min(this.state.currentCollectionIndex + 1, this.state.data.collections.length - 1);
+
+        this.setState({
+            currentCollectionIndex: nextIndex
+        });
+    };
     
     render() {
-        const { collections = [], title = 'Loading' } = this.state.data;
-        console.log(collections, title);
+        if (!this.state.data) {
+            return (<Text>Loading</Text>);
+        }
+        const { currentCollectionIndex = 0, data: { collections = [], title = '' } } = this.state;
+        const collection = collections[currentCollectionIndex];
         
         return (
             <View style={styles.landingPage}>
                 <Text style={styles.title}>{title}</Text>
-                {collections.map((collection) => {
-                    return (
-                        <Collection key={collection.urn} {...collection} />
-                    );
-                })}
+
+                <VrButton onClick={this._previousCollection} style={styles.prevButton}>
+                    <Text>Prev</Text>
+                </VrButton>
+
+                
+                <VrButton onClick={this._nextCollection} style={styles.nextButton}>
+                    <Text>Next</Text>
+                </VrButton>
+
+                <Collection key={collection.urn} {...collection} /> 
             </View>
         )
     }
@@ -44,10 +70,21 @@ export class Landingpage extends React.Component {
 
 const styles = StyleSheet.create({
     landingPage: {
-        width: '100%'
+        width: '100%',
+        height: '100%'
     },
     title: {
         fontSize: 30,
         marginBottom: 20
     },
+    prevButton: {
+        position: 'absolute',
+        top: 0,
+        left: 100,
+    },
+    nextButton: {
+        position: 'absolute',
+        top: 0,
+        right: 100,
+    }
 });
