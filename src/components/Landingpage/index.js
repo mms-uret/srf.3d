@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Image, StyleSheet, Text, View, VrButton} from 'react-360';
-
+import { Collection } from '../Collection';
 export class Landingpage extends React.Component {
     state = {
         data: 'hello'
@@ -31,11 +31,10 @@ export class Landingpage extends React.Component {
         
         return (
             <View>
-            <Text style={styles.title}>{title}</Text>
-            {collections.map((collection) => {
-                const { title, urn } = collection;
-                return (
-                    <Text key={urn}>{title}</Text>
+                <Text style={styles.title}>{title}</Text>
+                {collections.map((collection) => {
+                    return (
+                        <Collection key={collection.urn} {...collection} />
                     );
                 })}
             </View>
@@ -46,5 +45,6 @@ export class Landingpage extends React.Component {
 const styles = StyleSheet.create({
     title: {
         fontSize: 30,
+        marginBottom: 20
     },
 });
