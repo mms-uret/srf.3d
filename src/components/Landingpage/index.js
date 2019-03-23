@@ -80,7 +80,6 @@ const styles = StyleSheet.create({
     },
     landingPageWrapper: {
         flexDirection: 'row',
-        alignItems: 'stretch',
         alignItems: 'center',
         justifyContent: 'center'
     },
