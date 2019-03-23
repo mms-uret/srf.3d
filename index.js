@@ -13,7 +13,6 @@ export default class Hello360 extends React.Component {
   };
 
   setArticle = (articleId) =>  {
-      console.log(articleId);
       this.setState({
           articleToDisplay: articleId
       })
