@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, VrButton } from 'react-360';
+import { StyleSheet, Text, View, VrButton, Image } from 'react-360';
 import { Collection } from '../Collection';
 export class Landingpage extends React.Component {
     state = {
@@ -50,19 +50,19 @@ export class Landingpage extends React.Component {
         const collection = collections[currentCollectionIndex];
 
         return (
-            <View style={styles.landingPage}>
-                <Text style={styles.title}>{title}</Text>
-
-                <VrButton onClick={this._previousCollection} style={[styles.button, styles.prevButton]}>
-                    <Text style={styles.buttonText}>Prev</Text>
+            <View style={styles.landingPageWrapper}>
+                <VrButton onClick={this._previousCollection} style={styles.button}>
+                    <Text style={styles.buttonText}>&lt;</Text>
                 </VrButton>
 
+                <View style={styles.landingPage}>
+                    <Text style={styles.title}>{title}</Text>
+                    <Collection setArticle={this.props.setArticle} key={collection.urn} {...collection} />
+                </View>
 
-                <VrButton onClick={this._nextCollection} style={[styles.button, styles.nextButton]}>
-                <Text style={styles.buttonText}>Next</Text>
+                <VrButton onClick={this._nextCollection} style={styles.button}>
+                    <Text style={styles.buttonText}>&gt;</Text>
                 </VrButton>
-
-                <Collection setArticle={this.props.setArticle} key={collection.urn} {...collection} />
             </View>
         )
     }
@@ -78,9 +78,15 @@ const styles = StyleSheet.create({
     loading: {
         fontSize: 40
     },
+    landingPageWrapper: {
+        flexDirection: 'row',
+        alignItems: 'stretch',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     landingPage: {
-        width: '100%',
         height: '100%',
+        flex: 1,
         backgroundColor: '#F5F5F4'
     },
     title: {
@@ -91,16 +97,14 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     button: {
-        position: 'absolute',
-        top: 0,
-    },
-    prevButton: {
-        left: 100,
-    },
-    nextButton: {
-        right: 100,
+        backgroundColor: 'white',
+        margin: 8,
+        paddingBottom: 8,
+        paddingLeft: 8,
+        paddingRight: 8
     },
     buttonText: {
         color: '#22211d',
+        fontSize: 30,
     }
 });

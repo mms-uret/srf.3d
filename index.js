@@ -40,8 +40,7 @@ export default class Hello360 extends React.Component {
 const styles = StyleSheet.create({
   panel: {
     width: 1000,
-    height: 800,
-    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    height: 600,
     justifyContent: 'flex-start',
     alignItems: 'center',
   }
